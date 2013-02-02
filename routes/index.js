@@ -62,6 +62,7 @@ exports.index = function(req, res){
       }
     });
   }, function (err) {
+    console.error(err);
     res.send(500, "Something went wrong with my connection!");
   });
 };
