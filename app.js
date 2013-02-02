@@ -6,8 +6,7 @@
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
-  , path = require('path')
-  , foursquare = require('./lib/fsq');
+  , path = require('path');
 
 var app = express();
 
