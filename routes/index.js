@@ -101,5 +101,7 @@ exports.map = function(req, res){
 };
 
 exports.index = function (req, res) {
-  res.render('index');
+  res.render('index', {
+    title: "Where in the world is Danger Dan?"
+  });
 };

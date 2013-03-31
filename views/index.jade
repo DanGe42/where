@@ -1,0 +1,93 @@
+extends layout
+
+block append styles
+  style(type="text/css")
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+
+block content
+  .container-narrow
+    .masthead
+      ul.nav.nav-pills.pull-right
+        li.active
+          a(href="/") Home
+        li
+          a(href="https://github.com/DanGe42/where") About
+      h3.muted Where in the world
+
+    hr
+
+    .jumbotron
+      h1 Where is Danger Dan?
+      p.lead Oh, your head hasn't exploded yet? This should do it.
+      p.lead Introducing a revolutionary new service that will quickly locate
+        | that man, Danger Dan. You'll never have to ask yourself ever again,
+        | "Where in the world is Danger Dan?"
+      a.btn.btn-large.btn-success(href="/map") Try it today
+
+    hr
+
+    .row-fluid.marketing
+      .span6
+        h4 Realtime
+        p You will always know where he is, no matter what hour, location, or
+          | his shoe size.
+
+        h4 Reliable
+        p We use Amazon EC4 and S6 storage to guarantee eight nines of uptime.
+
+      .span6
+        h4 Accurate and precise
+        p
+          | We use the FaceOogleSquare+ API to reduce machine epsilon to
+          | only 0.5 &times; 10
+          sup -15
+          | .
+
+        h4 Cultivating efficient synergies
+        p My marketing expert said I needed more buzzwords for the enterprise
+          | market.
+
+    hr
+
+    .footer
+      p
+        // note the extra-critical extra whitespace at the end of this line
+        | &copy; 2013 
+        a(href="http://www.danielge.org/") Daniel Ge
+        |  (
+        a(href="https://github.com/DanGe42") Github
+        | )

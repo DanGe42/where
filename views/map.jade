@@ -2,20 +2,26 @@ extends layout
 
 block append scripts
   script
+    var wise_guy = #{wise_guy};
     function initialize() {
       var coordinate = new google.maps.LatLng(
-        #{checkin.venue.location.lat}, #{checkin.venue.location.lng});
+        #{checkin.venue.location.lat + offset_y},
+        #{checkin.venue.location.lng + offset_x});
       var mapOptions = {
         center: coordinate,
-        zoom: 14,
+        zoom: 7,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       var mapdiv = document.getElementById("map_canvas");
+
+      if (wise_guy) {
+        mapdiv.classList.add("flip");
+      } else {
+        mapdiv.classList.add("mirror");
+      }
       var map = new google.maps.Map(mapdiv, mapOptions);
 
       var useragent = navigator.userAgent;
-
-
       setMarker(coordinate, map);
     }
 
@@ -77,7 +83,13 @@ block append styles
   style
     html { height: 100% }
     body { height: 100%; margin: 0; padding: 0 }
-    #map_canvas { height: 100% }
 
 block content
-  #map_canvas(style="width: 100%; height: 100%")
+  - if (wise_guy)
+    #wise_guy
+      .alert.alert-error
+        p
+          strong Oh snap!
+          |  Looks like we've got a wise guy here.
+  #map_container
+    #map_canvas(style="width: 100%; height: 100%")
