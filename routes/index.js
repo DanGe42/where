@@ -29,10 +29,8 @@ var condenseFsqData = function (checkin) {
   };
 }
 
-/*
- * GET home page.
- */
-exports.index = function(req, res){
+var renderMap = function (req, res, offset_lon, offset_lat) {
+  var wise_guy = offset_lon === 0 && offset_lat === 0;
   var token = config.FSQ_OAUTH_TOKEN;
   fsq.mostRecentCheckin(token, function(resp) {
     if (resp.statusCode != 200) {
@@ -46,10 +44,13 @@ exports.index = function(req, res){
       try {
         var json = JSON.parse(d);
         var checkin = condenseFsqData(extractFsqData(json));
-        res.render('index', {
+        res.render('map', {
           title: 'Where in the world...',
           api_key: config.GMAPS_API_KEY,
-          checkin: checkin
+          offset_x: offset_lon,
+          offset_y: offset_lat,
+          checkin: checkin,
+          wise_guy: wise_guy
         });
       } catch (e) {
         if (e instanceof SyntaxError) {
@@ -65,4 +66,40 @@ exports.index = function(req, res){
     console.error(err);
     res.send(500, "Something went wrong with my connection!");
   });
+}
+
+var MAP_RANGE_LAT = 20.0;
+var MAP_RANGE_LON = 20.0;
+var MAP_OFFSET_LAT = 0;
+var MAP_OFFSET_LON = -30.0;
+
+/*
+ * GET the map page
+ */
+exports.map = function(req, res){
+  // convert string param to float via type coercion
+  // If this fails, returns a NaN
+  var offset_lon = +(req.query.q);
+  var offset_lat = +(req.query.s);
+
+  // test for NaN
+  if (!(offset_lon == offset_lon && offset_lat == offset_lat)) {
+    offset_lon = Math.random() * MAP_RANGE_LON + MAP_OFFSET_LON;
+    offset_lat = Math.random() * MAP_RANGE_LAT + MAP_OFFSET_LAT;
+
+    if (offset_lon === 0) {
+      offset_lon = 0.5;
+    }
+    if (offset_lat === 0) {
+      offset_lat = 0.5;
+    }
+    res.redirect("/map?q=" + offset_lon + "&s=" + offset_lat);
+    return;
+  } else {
+    renderMap(req, res, offset_lon, offset_lat);
+  }
+};
+
+exports.index = function (req, res) {
+  res.render('index');
 };
