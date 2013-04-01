@@ -34,6 +34,9 @@ app.configure('production', function() {
 app.get('/', routes.index);
 app.get('/map', routes.map);
 
+app.get('/api/current', routes.api.current);
+app.post('/api/current', routes.api.nocurrent);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
