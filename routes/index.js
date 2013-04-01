@@ -11,3 +11,9 @@ exports.index = function (req, res) {
     title: "Where in the world is Danger Dan?"
   });
 };
+
+exports.faq = function (req, res) {
+  res.render('faq', {
+    title: "Frequently asked questions"
+  });
+}

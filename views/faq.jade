@@ -1,0 +1,79 @@
+extends layout
+
+block append styles
+  style
+    #faq-title {
+      margin-bottom: 1em;
+    }
+
+    .faq-entry {
+      margin-bottom: 1.5em;
+    }
+
+block append scripts
+  script
+    function init() {
+      var header = document.getElementById("faq-title");
+      header.addEventListener("mouseover", function () {
+        header.innerHTML = "Frequently questioned answers";
+      });
+      header.addEventListener("mouseout", function() {
+        header.innerHTML = "Frequently asked questions";
+      });
+    }
+
+    document.onreadystatechange = function () {
+      if (document.readyState === "complete") {
+        init();
+      }
+    };
+
+block content
+  .container-narrow
+    .masthead
+      ul.nav.nav-pills.pull-right
+        li
+          a(href="/") Home
+        li.active
+          a(href="/faq") FAQ
+        li
+          a(href="https://github.com/DanGe42/where") About
+      h3.muted Where in the world
+
+    hr
+
+    h1#faq-title Frequently asked questions
+
+    .faq-entry
+      h4 How do I use this?
+      p Click the big green button on the home page, move your face as close as
+        | you can towards the screen (without ramming your face into it, of
+        | course (we're not liable for any injuries as a result of ramming your
+        | face into your screen)) and stare into the map. Meditate.
+      p If you are successful, you will achieve the first step of the Way of
+        | the DanGe, which ends with reaching the Zen of the DanGe.
+
+    .faq-entry
+      h4 Why is the map backwards?
+      p Huh? It's not backwards for us.
+      p Perhaps you are part of that certain portion of the population has a
+        | genetic predisposition to seeing certain things mirrored. While we
+        | unfortunately cannot do much about it, you can obtain prescription
+        | mirror glasses from your local optometrist.
+      p Those glasses, though, tend to be expensive, so don't ruin them by
+        | ramming your face into the screen.
+
+    .faq-entry
+      h4 Do Danger Dan's feet change size regularly?
+      p Well, obviously. Why else would we make the claim, "you will always know
+        | where he is, no matter what hour, location, or his shoe size"? False
+        | advertising is against the law.
+
+    .faq-entry
+      h4 I went to the marked location, and I couldn't find Danger Dan? What
+        | gives?
+      p Check again. Now he's in Wyoming.
+
+    .faq-entry
+      h4 This isn't funny.
+      p That's not a question. And yes, this is funny.

@@ -33,6 +33,8 @@ app.configure('production', function() {
 
 app.get('/', routes.index);
 app.get('/map', routes.map);
+app.get('/faq', routes.faq);
+app.get('/fqa', routes.faq);
 
 app.get('/api/current', routes.api.current);
 app.post('/api/current', routes.api.nocurrent);
