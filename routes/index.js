@@ -69,9 +69,9 @@ var renderMap = function (req, res, offset_lon, offset_lat) {
 }
 
 var MAP_RANGE_LAT = 20.0;
-var MAP_RANGE_LON = 20.0;
+var MAP_RANGE_LON = 60.0;
 var MAP_OFFSET_LAT = 0;
-var MAP_OFFSET_LON = -30.0;
+var MAP_OFFSET_LON = -50.0;
 
 /*
  * GET /map
