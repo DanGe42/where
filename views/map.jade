@@ -6,27 +6,6 @@ block append meta
 block append scripts
   script
     var wise_guy = #{wise_guy};
-    function initialize() {
-      var coordinate = new google.maps.LatLng(
-        #{checkin.venue.location.lat + offset_y},
-        #{checkin.venue.location.lng + offset_x});
-      var mapOptions = {
-        center: coordinate,
-        zoom: 7,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      var mapdiv = document.getElementById("map_canvas");
-
-      if (wise_guy) {
-        mapdiv.classList.add("flip");
-      } else {
-        mapdiv.classList.add("mirror");
-      }
-      var map = new google.maps.Map(mapdiv, mapOptions);
-
-      var useragent = navigator.userAgent;
-      setMarker(coordinate, map);
-    }
 
     function setMarker(coordinate, map) {
       var marker = new google.maps.Marker({
@@ -69,6 +48,38 @@ block append scripts
           infoBubble.open(map, marker);
         }, 500);
       });
+    }
+
+    function initDOM (mapdiv) {
+      if (wise_guy) {
+        mapdiv.classList.add("flip");
+      } else {
+        mapdiv.classList.add("mirror");
+      }
+
+      Mousetrap.bind('up up down down left right left right b a enter',
+        function() {
+          console.log("spinning... wheeee!");
+          document.body.classList.add("spin");
+        });
+    }
+
+    function initialize() {
+      var coordinate = new google.maps.LatLng(
+        #{checkin.venue.location.lat + offset_y},
+        #{checkin.venue.location.lng + offset_x});
+      var mapOptions = {
+        center: coordinate,
+        zoom: 7,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var mapdiv = document.getElementById("map_canvas");
+
+      initDOM(mapdiv);
+      var map = new google.maps.Map(mapdiv, mapOptions);
+
+      var useragent = navigator.userAgent;
+      setMarker(coordinate, map);
     }
 
     function loadScript() {

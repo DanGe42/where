@@ -20,6 +20,11 @@ block append scripts
       header.addEventListener("mouseout", function() {
         header.innerHTML = "Frequently asked questions";
       });
+
+      Mousetrap.bind('up up down down left right left right b a enter',
+        function() {
+          document.body.classList.add("comic");
+        });
     }
 
     document.onreadystatechange = function () {
